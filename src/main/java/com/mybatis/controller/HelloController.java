@@ -23,6 +23,10 @@ public class HelloController {
     @Autowired
     private HobbyIService hobbyIService;
 
+    //集群暂时弄不了 TODO
+    //@Autowired
+    //private JedisCluster jedisCluster;
+
     @RequestMapping("/index")
     @ResponseBody
     public String index(){
