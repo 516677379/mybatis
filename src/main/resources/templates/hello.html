@@ -1,11 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>Title</title>
 </head>
 <body>
- hello world!2121
- <p>${hobbyGroupList.size()}}</p>
+ hello world!
+ <p th:text="${name}"></p>
+ <p th:text="${sex}"></p>
+ <table border="1">
+     <tr>
+         <th>id</th>
+         <th>类别</th>
+         <th>状态变量：index</th>
+         <th>状态变量：count</th>
+         <th>状态变量：size</th>
+         <th>状态变量：current.userName</th>
+         <th>状态变量：even</th>
+         <th>状态变量：odd</th>
+         <th>状态变量：first</th>
+         <th>状态变量：last</th>
+     </tr>
+     <tr th:each="hobby,hobbyState:${hobbyGroupList}">
+        <td th:text="${hobby.group_id}">ss</td>
+         <td th:text="${hobby.group_name}">yes</td>
+         <th th:text="${hobbyState.index}"></th>
+         <th th:text="${hobbyState.count}">状态变量：count</th>
+         <th th:text="${hobbyState.size}">状态变量：size</th>
+         <th th:text="${hobbyState.current.group_name}">状态变量：current</th>
+         <th th:text="${hobbyState.even}">状态变量：even****</th>
+         <th th:text="${hobbyState.odd}">状态变量：odd</th>
+         <th th:text="${hobbyState.first}">状态变量：first</th>
+         <th th:text="${hobbyState.last}">状态变量：last</th>
+     </tr>
+ </table>
+
 </body>
 </html>
