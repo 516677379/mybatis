@@ -3,6 +3,7 @@ package com.mybatis.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.mybatis.modles.HobbyGroup;
 import com.mybatis.service.IService.HobbyIService;
+import com.mybatis.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,13 @@ public class HelloController {
 
     @Autowired
     private HobbyIService hobbyIService;
+
+    @Autowired
+    private RedisService redisService;
+
+    //@Autowired
+    //private StringRedisTemplate stringRedisTemplate;
+
 
     //集群暂时弄不了 TODO
     //@Autowired
@@ -44,8 +52,18 @@ public class HelloController {
         mv.setViewName("hello");
         return mv;//返回页面
     }
+    //@RequestMapping("/index3")
+    //public String index2( Model model){
+    //    stringRedisTemplate.opsForValue().set("ID","123");
+    //    System.out.println(stringRedisTemplate.opsForValue().get("ID"));
+    //    model.addAttribute("sex","男");
+    //    return "/view/test";//返回页面
+    //}
+
     @RequestMapping("/index3")
     public String index2( Model model){
+        redisService.set("today","20171219");
+        System.out.println(redisService.get("today"));
         model.addAttribute("sex","男");
         return "/view/test";//返回页面
     }
