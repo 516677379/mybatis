@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.mybatis.modles.HobbyGroup;
 import com.mybatis.service.IService.HobbyIService;
 import com.mybatis.service.RedisService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,12 +16,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
+
 /**
  * Created by 51667 on 2017/12/15.
  */
 @Controller
 @RequestMapping("/hello")
 public class HelloController {
+
+    private static final Logger LOGGER= LoggerFactory.getLogger(HelloController.class);
 
     @Autowired
     private HobbyIService hobbyIService;
@@ -38,6 +43,8 @@ public class HelloController {
     @RequestMapping("/index")
     @ResponseBody
     public String index(){
+        LOGGER.info("springboot自带日志");
+        LOGGER.error("测试error日志");
         List<HobbyGroup> hobbyGroupList=hobbyIService.findHobbyGroup();
         return JSONObject.toJSONString(hobbyGroupList);
     }
