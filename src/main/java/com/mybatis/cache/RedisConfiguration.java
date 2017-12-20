@@ -1,6 +1,8 @@
 //package com.mybatis.cache;
 //
 //import org.springframework.beans.factory.annotation.Value;
+//import org.springframework.cache.annotation.CachingConfigurerSupport;
+//import org.springframework.cache.annotation.EnableCaching;
 //import org.springframework.context.annotation.Bean;
 //import org.springframework.context.annotation.Configuration;
 //import redis.clients.jedis.HostAndPort;
@@ -13,7 +15,8 @@
 // * Created by 51667 on 2017/12/17.
 // */
 //@Configuration
-//public class RedisConfiguration {
+//@EnableCaching
+//public class RedisConfiguration extends CachingConfigurerSupport {
 //    @Value("${spring.redis.cluster.nodes}")
 //    private String clusterNodes;
 //
