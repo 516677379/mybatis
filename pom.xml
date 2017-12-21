@@ -87,7 +87,15 @@
 		<!--	<scope>provided</scope>-->
 		</dependency>
 
-		<!--热部署1-->
+        <!--数据库监控-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.1.6</version>
+        </dependency>
+
+
+        <!--热部署1-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
