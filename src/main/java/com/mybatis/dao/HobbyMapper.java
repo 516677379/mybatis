@@ -13,6 +13,9 @@ import java.util.List;
     @Component
 public interface HobbyMapper {
 
-    @Select("select * from hobby_group;")
+    @Select("select * from hobby_group ")
     List<HobbyGroup> findHobbyGroup();
+
+    @Select("select count(*) from hobby_group ")
+    long groupCount();
 }

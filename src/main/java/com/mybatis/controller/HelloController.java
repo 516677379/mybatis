@@ -1,9 +1,11 @@
 package com.mybatis.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
 import com.mybatis.modles.HobbyGroup;
 import com.mybatis.service.IService.HobbyIService;
 import com.mybatis.service.RedisService;
+import com.mybatis.utils.PageBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +47,12 @@ public class HelloController {
     public String index(){
         LOGGER.info("springboot自带日志");
         LOGGER.error("测试error日志");
+        PageHelper.startPage(2, 4);
         List<HobbyGroup> hobbyGroupList=hobbyIService.findHobbyGroup();
-        return JSONObject.toJSONString(hobbyGroupList);
+        long countNums=hobbyIService.groupCount();
+        PageBean<HobbyGroup> pageData=new PageBean<>(1, 2, Integer.parseInt(countNums+""));
+        pageData.setItems(hobbyGroupList);
+        return JSONObject.toJSONString(pageData.getItems());
     }
 
     @RequestMapping("/index2")
@@ -73,5 +79,22 @@ public class HelloController {
         System.out.println(redisService.get("today"));
         model.addAttribute("sex","男");
         return "/view/test";//返回页面
+    }
+
+    //分页
+    @RequestMapping("/index4")
+    public String index4(Integer pageNum,Integer pageSize ){
+        if(null==pageSize){
+            pageSize=4;
+        }
+        if(null==pageNum){
+            pageSize=1;
+        }
+        PageHelper.startPage(2, 4);
+        List<HobbyGroup> hobbyGroupList=hobbyIService.findHobbyGroup();
+        long countNums=hobbyIService.groupCount();
+        PageBean<HobbyGroup> pageData=new PageBean<>(1, 2, Integer.parseInt(countNums+""));
+        pageData.setItems(hobbyGroupList);
+        return JSONObject.toJSONString(pageData.getItems());
     }
 }

@@ -20,4 +20,6 @@ public class HobbyService implements HobbyIService {
     public List<HobbyGroup> findHobbyGroup(){
         return hobbyMapper.findHobbyGroup();
     }
+
+    public long groupCount(){return hobbyMapper.groupCount(); }
 }

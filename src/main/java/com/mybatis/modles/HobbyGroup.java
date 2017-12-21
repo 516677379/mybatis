@@ -1,10 +1,9 @@
 package com.mybatis.modles;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.Data;
+
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -14,46 +13,19 @@ import java.io.Serializable;
  * 使用@Id指定主键.
  */
 @Entity
+@Table(name = "hobby_group")
+@Data
 public class HobbyGroup implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long group_id;
 
+    @Column(name = "group_name")
     private String group_name;
 
     private Long f_id;
 
     private Integer is_online;
 
-    public Long getGroup_id() {
-        return group_id;
-    }
 
-    public void setGroup_id(Long group_id) {
-        this.group_id = group_id;
-    }
-
-    public String getGroup_name() {
-        return group_name;
-    }
-
-    public void setGroup_name(String group_name) {
-        this.group_name = group_name;
-    }
-
-    public Long getF_id() {
-        return f_id;
-    }
-
-    public void setF_id(Long f_id) {
-        this.f_id = f_id;
-    }
-
-    public Integer getIs_online() {
-        return is_online;
-    }
-
-    public void setIs_online(Integer is_online) {
-        this.is_online = is_online;
-    }
 }

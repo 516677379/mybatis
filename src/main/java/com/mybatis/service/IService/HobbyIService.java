@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface HobbyIService {
     List<HobbyGroup> findHobbyGroup();
+    long groupCount();
 }
