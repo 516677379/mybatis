@@ -1,0 +1,13 @@
+1.框架springboot+mybatis+pageHelper+lombok+mysql+quartzTask+redis+log+druid
+2.还需要实现的部分
+　　　上传下载［excel］
+　　　xml json解析
+　　　加密[密码]
+
+    权限处理
+    监听/过滤
+    　　　
+　　消息中间件
+
+　　es搜索引擎
+----以上实现后搭建sprinbcloud框架+dubbo----------------
