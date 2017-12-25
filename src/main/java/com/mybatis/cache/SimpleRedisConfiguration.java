@@ -74,4 +74,14 @@ public class SimpleRedisConfiguration  extends CachingConfigurerSupport{
     //    redisTemplate.setConnectionFactory(factory);
     //    return redisTemplate;
     //}
+
+    /**
+     * Redis的模板 作为发布者
+     * @param connectionFactory
+     * @return
+     */
+    //@Bean
+    //public StringRedisTemplate template(RedisConnectionFactory connectionFactory){
+    //    return new StringRedisTemplate(connectionFactory);
+    //}
 }

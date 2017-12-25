@@ -9,6 +9,7 @@ import com.mybatis.utils.PageBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,9 +35,8 @@ public class HelloController {
     @Autowired
     private RedisService redisService;
 
-    //@Autowired
-    //private StringRedisTemplate stringRedisTemplate;
-
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     //集群暂时弄不了 TODO
     //@Autowired
@@ -96,5 +96,13 @@ public class HelloController {
         PageBean<HobbyGroup> pageData=new PageBean<>(1, 2, Integer.parseInt(countNums+""));
         pageData.setItems(hobbyGroupList);
         return JSONObject.toJSONString(pageData.getItems());
+    }
+
+    @RequestMapping("/index5")
+    @ResponseBody
+    public String index5( Model model){
+        redisTemplate.convertAndSend("phone","18888888888");
+        LOGGER.info("Publisher sendes Topic...");
+        return "success";//返回页面
     }
 }

@@ -4,6 +4,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.ApplicationContext;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
@@ -12,6 +13,20 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @MapperScan("com.mybatis.dao")
 public class MybatisApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(MybatisApplication.class, args);
+		ApplicationContext ctx =SpringApplication.run(MybatisApplication.class, args);
+
+		//try {
+		//	StringRedisTemplate template = ctx.getBean(StringRedisTemplate.class);
+		//	CountDownLatch latch = ctx.getBean(CountDownLatch.class);
+        //
+		//	System.out.println("Sending message...");
+		//	template.convertAndSend("chat", "Hello from Redis!");
+        //
+		//	latch.await();
+        //
+		//	System.exit(0);
+		//} catch (InterruptedException e) {
+		//	e.printStackTrace();
+		//}
 	}
 }
