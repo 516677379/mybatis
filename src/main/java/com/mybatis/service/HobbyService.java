@@ -18,8 +18,12 @@ public class HobbyService implements HobbyIService {
     private HobbyMapper hobbyMapper;
 
     public List<HobbyGroup> findHobbyGroup(){
+        System.out.println("hobbycache无缓存的时候调用这里");
         return hobbyMapper.findHobbyGroup();
     }
 
-    public long groupCount(){return hobbyMapper.groupCount(); }
+    public long groupCount(){
+        System.out.println("hobbyCountCache无缓存的时候调用这里");
+        return hobbyMapper.groupCount();
+    }
 }

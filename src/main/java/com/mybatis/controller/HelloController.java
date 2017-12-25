@@ -9,6 +9,7 @@ import com.mybatis.utils.PageBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,10 +45,17 @@ public class HelloController {
 
     @RequestMapping("/index")
     @ResponseBody
-    public String index(){
+    @Cacheable(value = "hobbyCache",keyGenerator = "keyGenerator")
+    public String index(Integer pageSize,Integer pageNum){
+        if(null==pageSize){
+            pageSize=4;
+        }
+        if(null==pageNum){
+            pageNum=1;
+        }
         LOGGER.info("springboot自带日志");
         LOGGER.error("测试error日志");
-        PageHelper.startPage(2, 4);
+        PageHelper.startPage(pageNum, pageSize);
         List<HobbyGroup> hobbyGroupList=hobbyIService.findHobbyGroup();
         long countNums=hobbyIService.groupCount();
         PageBean<HobbyGroup> pageData=new PageBean<>(1, 2, Integer.parseInt(countNums+""));
@@ -104,5 +112,16 @@ public class HelloController {
         redisTemplate.convertAndSend("phone","18888888888");
         LOGGER.info("Publisher sendes Topic...");
         return "success";//返回页面
+    }
+
+    @RequestMapping("/cacheTest")
+    @ResponseBody
+    public String cacheTest( Model model){
+        PageHelper.startPage(2, 4);
+        List<HobbyGroup> hobbyGroupList=hobbyIService.findHobbyGroup();
+        long countNums=hobbyIService.groupCount();
+        PageBean<HobbyGroup> pageData=new PageBean<>(1, 2, Integer.parseInt(countNums+""));
+        pageData.setItems(hobbyGroupList);
+        return JSONObject.toJSONString(pageData.getItems());
     }
 }

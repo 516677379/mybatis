@@ -12,6 +12,13 @@ import java.util.concurrent.CountDownLatch;
 
 /**
  * Created by 51667 on 2017/12/22.
+ * Spring Data Redis提供基于Redis发送和接收消息的所有需要的组件，我们只需要配置好三个东西：
+ * 一个连接工厂（connection factory）
+ *一个消息监听者容器(message listener container)
+ *一个Redis的模板(redis template)
+ * 我们将通过Redis模板来发送消息，同时将Receiver注册给消息监听者容器。
+ * 连接工厂将两者连接起来，使得它们可以通过Redis服务器通信。
+ * 如何连接呢？ 我们将连接工厂实例分别注入到监听者容器和Redis模板中即可
  */
 @Configuration
 public class SubscriberConfig {
@@ -26,7 +33,7 @@ public class SubscriberConfig {
                                                    MessageListenerAdapter listenerAdapter){
         RedisMessageListenerContainer container = new RedisMessageListenerContainer();
         container.setConnectionFactory(connectionFactory);
-        container.addMessageListener(listenerAdapter,new PatternTopic("phone"));
+        container.addMessageListener(listenerAdapter,new PatternTopic("phone"));//此处可更改topic
         return container;
     }
 
