@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+ hello world!3
+    <form action="/fileDeal/importFile3" method="post" enctype="multipart/form-data">
+        <input type="file" name="file"/>
+        <input type="submit" value="提交"/>
+    </form>
+
+    <br/>
+    <input type="button" onclick="exportFile()" value="导出"/>
+</body>
+<script type="text/javascript">
+    function exportFile(){
+        var url="/fileDeal/export";
+        window.open(url);
+    }
+</script>
+</html>
