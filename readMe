@@ -4,7 +4,7 @@
         druid：数据库监控  http://localhost:9000/druid/login
 2.java还需要实现的部分
 　　　√上传下载［excel］
-　　　xml json解析
+　　　√xml json解析[阿里巴巴的即可，此处不做]
 　　　√加密[密码base64 sha1 md5]
       权限处理
       监听/过滤 　　　
