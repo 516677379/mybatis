@@ -1,14 +1,19 @@
-√1.框架springboot+mybatis+pageHelper+lombok+mysql+quartzTask+redis+log+
-        druid: http://localhost:9000/druid/login
+√1.框架springboot+mybatis+pageHelper+lombok+mysql+quartzTask+redis+log+druid
+        quartzTask：定时任务
+        lombok：插件+注解 代码简化
+        druid：数据库监控  http://localhost:9000/druid/login
 2.java还需要实现的部分
-　　　上传下载［excel］
+　　　√上传下载［excel］
 　　　xml json解析
 　　　√加密[密码base64 sha1 md5]
       权限处理
       监听/过滤 　　　
-　　  消息中间件 socket
+　　  消息中间件 底层：socket
       pu uv 统计
       自定义注解[切面编程]
+      并发问题
+      多线程[线程池]
+      httpUtil 用于异步请求
 　　  es搜索引擎
 √3.测试下sourceTree回滚，sourceTree回滚后，自回滚代码版本到最新代码的更新会存在显示为待提交状态
     回滚 最好在某个分支上重新建立一个分支
