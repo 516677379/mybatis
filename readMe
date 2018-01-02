@@ -1,13 +1,13 @@
 √1.框架springboot+mybatis+pageHelper+lombok+mysql+quartzTask+redis+log+druid
         quartzTask：定时任务
         lombok：插件+注解 代码简化
-        druid：数据库监控  http://localhost:9000/druid/login
+        druid：数据库监控  http://localhost:9000/druid/login [需注意 分库分表数据库连接]
 2.java还需要实现的部分
 　　　√上传下载［excel］
 　　　√xml json解析[阿里巴巴的即可，此处不做]
 　　　√加密[密码base64 sha1 md5]
       权限处理
-      监听/过滤 　　　
+      √监听/过滤/拦截
 　　  消息中间件 底层：socket
       pu uv 统计
       自定义注解[切面编程]

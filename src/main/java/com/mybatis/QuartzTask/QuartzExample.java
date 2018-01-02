@@ -26,8 +26,8 @@ public class QuartzExample {
     L:last简写，用在day-of-month/day-of-week eg:day-of-month域中表示一个月的最后一天,
       如果在day-of-week域中前面加上数字，它表示一个月的最后几天，例如‘6L’就表示一个月的最后一个星期五
      */
-    //    每分钟启动
-    @Scheduled(cron = "0 0/1 * * * ?")
+    //    每5分钟启动
+    @Scheduled(cron = "0 0/5 * * * ?")
     public void timerToNow(){
         System.out.println("now time:" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
     }
