@@ -3,6 +3,7 @@ package com.mybatis.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.mybatis.modles.HobbyGroup;
+import com.mybatis.service.AsyncTaskService;
 import com.mybatis.service.IService.HobbyIService;
 import com.mybatis.service.RedisService;
 import com.mybatis.utils.PageBean;
@@ -10,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.core.task.TaskRejectedException;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +24,10 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 
 /**
@@ -42,6 +47,9 @@ public class HelloController {
 
     @Autowired
     private RedisTemplate redisTemplate;
+
+    @Autowired
+    AsyncTaskService asyncTaskService;
 
     //集群暂时弄不了 TODO
     //@Autowired
@@ -152,5 +160,34 @@ public class HelloController {
             e.printStackTrace();
         }
         return "success";//返回页面
+    }
+    @RequestMapping("/asy")
+    @ResponseBody
+    public String asy(HttpServletRequest request)throws InterruptedException,ExecutionException{
+        for(int i=0;i<20;i++){
+            asyncTaskService.executeAsyncTask(i);
+        }
+        List<Future<String>> listFuture = new ArrayList<Future<String>>();// 存放所有的线程，用于获取结果
+        try {
+            for (int i = 1; i <= 100; i++) {
+                while (true) {
+                    // 线程池超过最大线程数时，会抛出TaskRejectedException，则等待1s，直到不抛出异常为止
+                    Future<String> future = asyncTaskService.asyncInvokeReturnFuture(i);
+                    listFuture.add(future);
+                    break;
+                }
+            }
+        } catch (TaskRejectedException e){
+            System.out.println("线程池满，等待1S。");
+            Thread.sleep(1000);
+        }catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // 获取值。get是阻塞式，等待当前线程完成才返回值
+        for (Future<String> future : listFuture) {
+            System.out.println(future.get());
+        }
+        return "ok";
     }
 }
