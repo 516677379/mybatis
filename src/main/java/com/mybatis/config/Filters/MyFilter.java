@@ -31,6 +31,11 @@ public class MyFilter implements Filter{
         String requestURI = req.getRequestURI();
         System.out.println("执行过滤操作"+requestURI);
         //转换request和response类型至HttpServlet 有人说可能需要转换req/resp如上，否则报错，此处无问题
+
+        //解决跨域问题
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Headers", "Authentication");
+
         filterChain.doFilter(servletRequest, servletResponse);
     }
 }
