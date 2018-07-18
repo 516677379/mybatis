@@ -7,6 +7,8 @@ import com.mybatis.service.AsyncTaskService;
 import com.mybatis.service.IService.HobbyIService;
 import com.mybatis.service.RedisService;
 import com.mybatis.utils.PageBean;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,7 @@ import java.util.concurrent.Future;
  */
 @Controller
 @RequestMapping("/hello")
+@Api(value="/hello", tags="helloword")
 public class HelloController {
 
     private static final Logger LOGGER= LoggerFactory.getLogger(HelloController.class);
@@ -58,6 +61,7 @@ public class HelloController {
     @RequestMapping("/index")
     @ResponseBody
     @Cacheable(value = "hobbyCache",keyGenerator = "keyGenerator")
+    @ApiOperation(value = "index",notes = "indexTest")
     public String index(@RequestParam(required =false,defaultValue ="4") Integer pageSize,@RequestParam(required = false,defaultValue = "1") Integer pageNum){
         LOGGER.info("springboot自带日志");
         LOGGER.error("测试error日志");
@@ -70,6 +74,7 @@ public class HelloController {
     }
 
     @RequestMapping("/index2")
+    @ApiOperation(value = "index2",notes = "index2Test")
     public ModelAndView index2(@RequestParam(value = "hobbyGroupList",required = false)List<HobbyGroup> hobbyGroupList,Model model){
         hobbyGroupList=hobbyIService.findHobbyGroup();
         model.addAttribute("sex","男");

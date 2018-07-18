@@ -125,6 +125,25 @@
 			<version>2.7.0</version>
 		</dependency>
 
+		<!--用于调试 及文档编写-->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.6.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.6.1</version>
+		</dependency>
+
+		<!--sprinb actuator监控-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
 		<!--热部署1-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

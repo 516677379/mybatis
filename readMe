@@ -2,6 +2,8 @@
         quartzTask：定时任务
         lombok：插件+注解 代码简化
         druid：数据库监控  http://localhost:9000/druid/login [需注意 分库分表数据库连接]
+        swagger: http://localhost:9000/swagger-ui.html#/
+        actor:
 2.java还需要实现的部分
 　　　√上传下载［excel］
 　　　√xml json解析[阿里巴巴的即可，此处不做]
